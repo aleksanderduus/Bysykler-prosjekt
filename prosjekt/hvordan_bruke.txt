@@ -1,0 +1,30 @@
+Kjøring av trenings- og prediksjonsskript
+========================================
+
+Forutsetninger
+- Du står i prosjektmappen (prosjekt/)
+- Rådata ligger i ./raw_data/ med filene stations.csv, weather.csv, trips.csv
+- Python-miljø med numpy, pandas, scikit-learn, joblib installert
+
+1) Tren modell
+--------------
+python train.py
+
+- Skriptet kjører hele datalinjen via Pipeline.py-funksjonene, gjør modellvalg med tidsserie-CV, og lagrer:
+  - models/model.joblib (selve modellen m/forprosessering)
+  - models/model_meta.json (forventet RMSE og kolonnenavn)
+
+2) Lag prediksjon for neste hele time
+-------------------------------------
+python predict.py
+
+- Skriptet finner siste tidsstempel i model_ready.csv (UTC),
+  bygger features for denne timen og predikerer antall sykler +1 time (i tråd med labelen i trening).
+- Skriver ut:
+  - Siste tidsstempel i data (lokal tid, Europe/Oslo)
+  - Tidsstempelet prediksjonen gjelder for (lokal tid, neste hele + 1 time)
+  - Tabell med Nåværende og Predikerte sykler for alle målstasjoner
+
+Notater
+- predict.py justerer tidsvinduet i Pipeline-funksjonene dynamisk slik at den neste hele timen
+  alltid er inkludert, også om det kommer nye rader i rådata.
