@@ -1,20 +1,11 @@
+# Ignore data
+*.csv
+prosjekt/raw_data/
+
 # Python
 __pycache__/
 *.pyc
 .venv/
-env/
 
 # Jupyter
 .ipynb_checkpoints/
-
-# Models / data
-*.pkl
-*.csv
-
-# OS
-.DS_Store
-Thumbs.db
-
-# Raw data
-prosjekt/raw_data/
-*.csv
